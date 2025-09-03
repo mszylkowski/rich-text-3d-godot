@@ -49,10 +49,8 @@ var _text_2d := RichTextLabel.new()
 
 func _init() -> void:
 	if material_override and material_override is StandardMaterial3D:
-		Log.pr("before")
 		material_override.albedo_texture = null
 		_standard_mat = material_override.duplicate()
-		Log.pr("after")
 		_standard_mat.resource_local_to_scene = true
 		material_override = _standard_mat
 	else:
