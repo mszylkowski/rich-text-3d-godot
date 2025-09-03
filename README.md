@@ -5,7 +5,7 @@ RichText3D for Godot
 
 **A performant 3D [BBCode](https://docs.godotengine.org/en/4.4/tutorials/ui/bbcode_in_richtextlabel.html) renderer for [Godot](https://godotengine.org/).**
 
-![world](screenshots/animation.gif)
+![world](https://raw.githubusercontent.com/mszylkowski/rich-text-3d-godot/main/screenshots/animation.gif)
 
 ### Features
 
@@ -35,7 +35,9 @@ RichText3D for Godot
 
 ## Showcase
 
-![create_node](screenshots/create_node.png)
+![create_node](https://raw.githubusercontent.com/mszylkowski/rich-text-3d-godot/main/screenshots/create_node.png)
 
-![resolutions](screenshots/resolutions.png)
+![inspector](https://raw.githubusercontent.com/mszylkowski/rich-text-3d-godot/main/screenshots/inspector.png)
+
+![resolutions](https://raw.githubusercontent.com/mszylkowski/rich-text-3d-godot/main/screenshots/resolutions.png)
 
