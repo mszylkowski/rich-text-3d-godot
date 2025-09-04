@@ -44,10 +44,12 @@ extends MeshInstance3D
 
 @onready var _standard_mat: StandardMaterial3D
 
-var _subviewport: SubViewport = SubViewport.new()
-var _text_2d := RichTextLabel.new()
+var _subviewport: SubViewport
+var _text_2d : RichTextLabel
 
 func _init() -> void:
+	_text_2d = RichTextLabel.new()
+	_subviewport = SubViewport.new()
 	if material_override and material_override is StandardMaterial3D:
 		material_override.albedo_texture = null
 		_standard_mat = material_override.duplicate()
@@ -73,7 +75,7 @@ func _ready() -> void:
 	_subviewport.transparent_bg = true
 	_subviewport.size_2d_override_stretch = true
 	await _queue_render()
-	_standard_mat.albedo_texture = _subviewport.get_texture()
+	material_override.albedo_texture = _subviewport.get_texture()
 
 
 func _queue_render() -> void:
