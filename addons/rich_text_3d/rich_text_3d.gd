@@ -12,10 +12,10 @@ extends MeshInstance3D
 		_queue_render()
 
 @export var visible_ratio: float = 1.0:
-	set(new_amount):
-		visible_ratio = new_amount
+	set(r):
+		visible_ratio = r
 		if _text_2d:
-			_text_2d.visible_ratio = visible_ratio
+			_text_2d.visible_ratio = r
 
 @export_group("Formatting")
 ## Controls the text's horizontal alignment. Supports left, center, right, and fill.
