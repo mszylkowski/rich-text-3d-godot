@@ -75,6 +75,11 @@ extends MeshInstance3D
 @export_range(100, 2000, 5, "exp", "suffix:px") var text_width := 350.:
 	set(s): text_width = s; _queue_render()
 
+## Controls the maximum size of the texture (on each axis independently) to
+## avoid huge textures. Set to 0 on any axis to prevent clamping on that axis.
+@export var max_texture_size := Vector2(2048, 2048):
+	set(s): max_texture_size = s; _queue_render()
+
 ## Renders the text every frame.[br][br]
 ## [b]WARNING[/b]: This is very inefficient and will lose most performance benefits.
 @export var render_continuously := false:
@@ -182,7 +187,7 @@ func _update_billboard_mode() -> void:
 			_standard_mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
 
 func _queue_render() -> void:
-	_subviewport.size = size * resolution
+	_subviewport.size = size * _compute_resolution()
 	_subviewport.size_2d_override = Vector2(text_width, text_width * size.y / size.x)
 	_text_2d.size = _subviewport.size_2d_override
 	_text_2d.text = text
@@ -197,8 +202,14 @@ func _queue_render() -> void:
 	else:
 		await RenderingServer.frame_post_draw
 
+func _compute_resolution() -> int:
+	var x_limit = INF if max_texture_size.x <= 0 else min(resolution, max_texture_size.x / size.x)
+	var y_limit = INF if max_texture_size.y <= 0 else min(resolution, max_texture_size.y / size.y)
+	return min(x_limit, y_limit, resolution)
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_EDITOR_PRE_SAVE:
 		_standard_mat.albedo_texture = null
 	elif what == NOTIFICATION_EDITOR_POST_SAVE:
 		_standard_mat.albedo_texture = _subviewport.get_texture()
+
